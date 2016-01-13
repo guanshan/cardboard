@@ -1,5 +1,7 @@
 package com.wormhole.vrtoolkit.cardboard;
 
+import android.view.KeyEvent;
+
 import com.wormhole.vrtoolkit.cardboard.sensors.NfcSensor;
 
 final class VolumeKeyState {
@@ -34,11 +36,11 @@ final class VolumeKeyState {
 		}
 
 		int i = this.volumeKeysMode;
-		throw new IllegalStateException(36 + "Invalid volume keys mode " + i);
+		throw new IllegalStateException("Invalid volume keys mode " + i);
 	}
 
 	public boolean onKey(int keyCode) {
-		return ((keyCode == 24) || (keyCode == 25))
+		return ((keyCode == KeyEvent.KEYCODE_VOLUME_UP) || (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN))
 				&& (this.handler.areVolumeKeysDisabled());
 	}
 

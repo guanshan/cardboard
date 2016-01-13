@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 
 class FullscreenMode {
 	static final int NAVIGATION_BAR_TIMEOUT_MS = 2000;
@@ -14,7 +15,7 @@ class FullscreenMode {
 	}
 
 	void startFullscreenMode() {
-		this.activity.getWindow().addFlags(128);
+		this.activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		if (Build.VERSION.SDK_INT < 19) {
 			final Handler handler = new Handler();
@@ -43,6 +44,6 @@ class FullscreenMode {
 	}
 
 	void setFullscreenMode() {
-		this.activity.getWindow().getDecorView().setSystemUiVisibility(5894);
+		this.activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 	}
 }

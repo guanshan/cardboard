@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import com.wormhole.vrtoolkit.cardboard.sensors.NfcSensor;
 import com.wormhole.vrtoolkit.cardboard.sensors.SensorConnection;
 
 public class CardboardActivity extends Activity implements
 		SensorConnection.SensorListener, VolumeKeyState.Handler {
+	
 	private final SensorConnection sensorConnection = new SensorConnection(this);
 	private final VolumeKeyState volumeKeyState = new VolumeKeyState(this);
 	private final FullscreenMode fullscreenMode = new FullscreenMode(this);
@@ -93,7 +95,7 @@ public class CardboardActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(1);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.fullscreenMode.startFullscreenMode();
 		this.sensorConnection.onCreate(this);
 		this.volumeKeyState.onCreate();

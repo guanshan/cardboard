@@ -88,8 +88,8 @@ public class DistortionRenderer {
 
 		GLES20.glViewport(0, 0, this.hmd.getScreenParams().getWidth(), this.hmd
 				.getScreenParams().getHeight());
-		GLES20.glDisable(3089);
-		GLES20.glDisable(2884);
+		GLES20.glDisable(GLES20.GL_SCISSOR_TEST);
+		GLES20.glDisable(GLES20.GL_CULL_FACE);
 
 		GLES20.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
 		GLES20.glClear(16640);
@@ -100,7 +100,7 @@ public class DistortionRenderer {
 			GLES20.glUseProgram(this.programHolder.program);
 		}
 
-		GLES20.glEnable(3089);
+		GLES20.glEnable(GLES20.GL_SCISSOR_TEST);
 		GLES20.glScissor(0, 0, this.hmd.getScreenParams().getWidth() / 2,
 				this.hmd.getScreenParams().getHeight());
 		renderDistortionMesh(this.leftEyeDistortionMesh, textureId);
@@ -314,16 +314,16 @@ public class DistortionRenderer {
 		int[] textureIds = new int[1];
 		GLES20.glGenTextures(1, textureIds, 0);
 
-		GLES20.glBindTexture(3553, textureIds[0]);
-		GLES20.glTexParameteri(3553, 10242, 33071);
+		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureIds[0]);
+		GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
 
-		GLES20.glTexParameteri(3553, 10243, 33071);
+		GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
 
-		GLES20.glTexParameteri(3553, 10240, 9729);
+		GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
 
-		GLES20.glTexParameteri(3553, 10241, 9729);
+		GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
 
-		GLES20.glTexImage2D(3553, 0, textureFormat, width, height, 0,
+		GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, textureFormat, width, height, 0,
 				textureFormat, textureType, null);
 
 		return textureIds[0];
